@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - HealthCareer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>HealthCareer</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="cme-tracker.html"><i class="fas fa-calendar-check"></i> CME Tracker</a></li>
+                    <li><a href="resume-builder.html"><i class="fas fa-file-alt"></i> CV Builder</a></li>
+                    <li><a href="ats-checker.html"><i class="fas fa-chart-line"></i> ATS Checker</a></li>
+                    <li><a href="ai-guidance.html"><i class="fas fa-robot"></i> AI Guidance</a></li>
+                    <li><a href="data-flow.html"><i class="fas fa-tasks"></i> Data Flow</a></li>
+                    <li><a href="interview-prep.html"><i class="fas fa-video"></i> Interview Prep</a></li>
+                    <li><a href="pricing.html"><i class="fas fa-crown"></i> Subscription</a></li>
+                    <li><a href="#" id="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <div class="user-menu">
+                    <span id="user-name">Dr. Smith</span>
+                    <img src="assets/images/avatar.svg" alt="User" class="avatar">
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Total CME Credits</h3>
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="stat-number" id="total-credits">0</div>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <p>Towards annual requirement</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Active Applications</h3>
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="stat-number" id="applied-count">0</div>
+                    <div class="stat-details">
+                        <span>Interviewing: <span id="interviewing-count">0</span></span>
+                        <span>Offers: <span id="offers-count">0</span></span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">CV ATS Score</h3>
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-number" id="ats-score">85</div>
+                    <p>Last checked: Today</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Current Plan</h3>
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="badge badge-success" id="current-plan">Free</div>
+                    <p>Renews: <span id="renewal-date">N/A</span></p>
+                </div>
+            </div>
+
+            <!-- Recent CME Activities -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Recent CME Activities</h3>
+                    <a href="cme-tracker.html" class="btn-outline">View All</a>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Date</th>
+                                <th>Credits</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-activities">
+                            <!-- Filled by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Job Application Pipeline -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Application Pipeline</h3>
+                    <a href="data-flow.html" class="btn-outline">Manage</a>
+                </div>
+                <div class="pipeline-view">
+                    <!-- Kanban style view -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboard();
+            
+            // Logout handler
+            document.getElementById('logout').addEventListener('click', async (e) => {
+                e.preventDefault();
+                await supabaseClient.signOut();
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
